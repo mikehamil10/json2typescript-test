@@ -10,12 +10,10 @@
 
 ## To build in debug mode:
 
-`ionic cordova build ios`
-
-(open project in XCode and run)
+- `ionic cordova build ios`
+- _open project in XCode and run_
 
 ## To build in prod mode:
 
-`ionic cordova build ios --prod`
-
-(open project in XCode and run)
+- `ionic cordova build ios --prod`
+- _open project in XCode and run_
