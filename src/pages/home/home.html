@@ -1,14 +1,64 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="dark">
     <ion-title>
-      Ionic Blank
+      Welcome To GloboGym
     </ion-title>
   </ion-navbar>
+
+  <ion-toolbar>
+    <ion-segment [(ngModel)]="filter" color="dark">
+      <ion-segment-button value="store">
+        All Staff
+      </ion-segment-button>
+      <ion-segment-button value="trainer">
+        Tim Trainer
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+<ion-content [ngSwitch]="filter">
+  <div>
+    <!-- Store Data -->
+    <div *ngSwitchCase="'store'">
+      <ion-card>
+        <ion-card-header color="primary">
+          Your Club Open Today
+        </ion-card-header>
+        <h1 padding text-center>
+          {{storeSchedule?.minTime | amDateFormat:'LT'}} - {{storeSchedule?.maxTime | amDateFormat:'LT'}}
+        </h1>
+      </ion-card>
+
+      <ion-list>
+        <ion-list-header color="primary">
+          Unavailable Times
+        </ion-list-header>
+        <ion-item *ngFor="let t of storeSchedule?.unavailableTimes">
+          {{t.startTime | amDateFormat:'LT'}} - {{t.endTime | amDateFormat:'LT'}}
+        </ion-item>
+      </ion-list>
+    </div>
+
+    <!-- Trainer Data -->
+    <div *ngSwitchCase="'trainer'">
+      <ion-card>
+        <ion-card-header color="secondary">
+          Tim Trainer Available Today
+        </ion-card-header>
+        <h1 padding text-center>
+          {{trainerSchedule?.minTime | amDateFormat:'LT'}} - {{trainerSchedule?.maxTime | amDateFormat:'LT'}}
+        </h1>
+      </ion-card>
+
+      <ion-list>
+        <ion-list-header color="secondary">
+          Unavailable Times
+        </ion-list-header>
+        <ion-item *ngFor="let t of trainerSchedule?.unavailableTimes">
+          {{t.startTime | amDateFormat:'LT'}} - {{t.endTime | amDateFormat:'LT'}}
+        </ion-item>
+      </ion-list>
+    </div>
+  </div>
 </ion-content>
